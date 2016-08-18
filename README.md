@@ -20,4 +20,4 @@ When the post a new pin button is pressed, users can:
 2. If user already had a post, then an alert view controller will pop out to ask the user whether to cover the last post with this new one after user pressed the post a new pin button.
 
 
-There could be some other features not listed above and bugs, you are very welcome to explore by yourself.
+There could be some other features not listed above and bugs, you are very welcome to explore by yourself!
