@@ -4,7 +4,12 @@ Third Project from Udacity
 This App allows user to poster a location where every one else who has registered an Udacity account or facebook account can see.
 User can also poster a link with it.
 
+![b4b3ad6e-21ef-473c-bd11-8082dcfae010](https://cloud.githubusercontent.com/assets/16344019/17908382/41641de8-694e-11e6-887b-3816dc7802b2.png)
+![7a920d55-55a7-4ba2-958d-9d1800a63f57](https://cloud.githubusercontent.com/assets/16344019/17908384/42217a46-694e-11e6-89a6-c103263fd9ea.png)
+
+
 On the login view controller, users can:
+
 1. login with Udacity account or facebook account.
 
 
