@@ -11,21 +11,22 @@ import Foundation
 
 extension OnTheMapClient {
     
-    func queryForLocation(completionHandlerForQuery:(result: Int!, success: Bool, error: NSError?)->Void){
+    func queryForLocation(_ completionHandlerForQuery:@escaping (_ result: Int?, _ success: Bool, _ error: NSError?)->Void){
         
         let parameter = ["where" : "{\"uniqueKey\": \"\(self.account_key!)\"}"]
-        let urlString = OnTheMapClient.OnTheMapURLFromParseParameters(parameter)
+        let urlString = OnTheMapClient.OnTheMapURLFromParseParameters(parameter as [String : AnyObject])
         
-        let request = NSMutableURLRequest(URL: urlString)
+//        let request = NSMutableURLRequest(url: urlString)
+        var request = URLRequest(url: urlString)
         request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
         request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
-        let session = NSURLSession.sharedSession()
-        let task = session.dataTaskWithRequest(request) { (data, response, error) in
+        let session = URLSession.shared
+        let task = session.dataTask(with: request, completionHandler: { (data, response, error) in
             
-            func sendError(error: String){
+            func sendError(_ error: String){
                 let userInfo = [NSLocalizedDescriptionKey: error]
                 
-                completionHandlerForQuery(result: nil, success: false, error: NSError(domain: "taskForPOSTMethod", code: 1, userInfo: userInfo))
+                completionHandlerForQuery(nil, false, NSError(domain: "taskForPOSTMethod", code: 1, userInfo: userInfo))
             }
             
             guard error == nil else{
@@ -40,11 +41,12 @@ extension OnTheMapClient {
             
             let parsedResults: AnyObject!
             do{
-                parsedResults = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)
+                parsedResults = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as AnyObject!
             }catch {
                 sendError("cannot parse the data")
                 return
             }
+            
             
             
             if parsedResults != nil {
@@ -56,30 +58,31 @@ extension OnTheMapClient {
                     self.objectID = objectID
                 }
                 
-                completionHandlerForQuery(result: results?.count, success: true, error: error)
+                completionHandlerForQuery(results?.count, true, error as NSError?)
             }
             
-        }
+        }) 
         task.resume()
     }
     
-    func updateLocation(mapString: String, mediaURL: String, latitude: Double, longitude: Double, completionHandlerForUpdate:(success: Bool, error: NSError?)->Void){
+    func updateLocation(_ mapString: String, mediaURL: String, latitude: Double, longitude: Double, completionHandlerForUpdate:@escaping (_ success: Bool, _ error: NSError?)->Void){
         
-        
+        print("we are doing it")
         let urlString = "https://api.parse.com/1/classes/StudentLocation/\(self.objectID!)"
-        let url = NSURL(string: urlString)
-        let request = NSMutableURLRequest(URL: url!)
-        request.HTTPMethod = "PUT"
+        let urlString1 = "https://parse.udacity.com/parse/classes/StudentLocation/\(self.objectID!)"
+        let url = URL(string: urlString1)
+        var request = URLRequest(url: url!)
+        request.httpMethod = "PUT"
         request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
         request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.HTTPBody = "{\"uniqueKey\": \"\(self.account_key!)\", \"firstName\": \"\(self.firstName!)\", \"lastName\": \"\(self.lastName!)\",\"mapString\": \"\(mapString)\", \"mediaURL\": \"\(mediaURL)\",\"latitude\": \(latitude), \"longitude\": \(longitude)}".dataUsingEncoding(NSUTF8StringEncoding)
-        let session = NSURLSession.sharedSession()
-        let task = session.dataTaskWithRequest(request) { data, response, error in
-            func sendError(error: String){
+        request.httpBody = "{\"uniqueKey\": \"\(self.account_key!)\", \"firstName\": \"\(self.firstName!)\", \"lastName\": \"\(self.lastName!)\",\"mapString\": \"\(mapString)\", \"mediaURL\": \"\(mediaURL)\",\"latitude\": \(latitude), \"longitude\": \(longitude)}".data(using: String.Encoding.utf8)
+        let session = URLSession.shared
+        let task = session.dataTask(with: request, completionHandler: { (data, response, error) -> Void in
+            func sendError(_ error: String){
                 let userInfo = [NSLocalizedDescriptionKey: error]
                 
-                completionHandlerForUpdate(success: false, error: NSError(domain: "taskForPOSTMethod", code: 1, userInfo: userInfo))
+                completionHandlerForUpdate(false, NSError(domain: "taskForPOSTMethod", code: 1, userInfo: userInfo))
             }
             
             guard error == nil else{
@@ -92,35 +95,38 @@ extension OnTheMapClient {
                 return
             }
             
-            let parsedResults: AnyObject!
+            var parsedResults: AnyObject!
             do{
-                parsedResults = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)
+                parsedResults = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as AnyObject!
             }catch {
                 sendError("cannot parse the data")
                 return
             }
+
             
-            completionHandlerForUpdate(success: true, error: error)
+            completionHandlerForUpdate(true, error as NSError?)
             
-        }
+        }) 
         task.resume()
         
     }
     
-    func loginViaFacebook(accessToken: String, completionHandlerFB:(success: Bool, error: NSError?)-> Void){
+    func loginViaFacebook(_ accessToken: String, completionHandlerFB:@escaping (_ success: Bool, _ error: NSError?)-> Void){
         
-        let request = NSMutableURLRequest(URL: NSURL(string: "https://www.udacity.com/api/session")!)
-        request.HTTPMethod = "POST"
+        var request = URLRequest(url: URL(string: "https://www.udacity.com/api/session")!)
+        
+//        var request1 = URLRequest(url: URL(string:"https://parse.udacity.com/parse/classes/StudentLocation/")!)
+        request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.HTTPBody = "{\"facebook_mobile\": {\"access_token\": \"\(accessToken);\"}}".dataUsingEncoding(NSUTF8StringEncoding)
-        let session = NSURLSession.sharedSession()
-        let task = session.dataTaskWithRequest(request) { data, response, error in
+        request.httpBody = "{\"facebook_mobile\": {\"access_token\": \"\(accessToken);\"}}".data(using: String.Encoding.utf8)
+        let session = URLSession.shared
+        let task = session.dataTask(with: request, completionHandler: { data, response, error in
             
-            func sendError(error: String){
+            func sendError(_ error: String){
                 let userInfo = [NSLocalizedDescriptionKey: error]
                 
-                completionHandlerFB(success: false, error: NSError(domain: "taskForPOSTMethod", code: 1, userInfo: userInfo))
+                completionHandlerFB(false, NSError(domain: "taskForPOSTMethod", code: 1, userInfo: userInfo))
             }
             
             guard error == nil else{
@@ -132,11 +138,15 @@ extension OnTheMapClient {
                 sendError("There is no data in Query")
                 return
             }
-            let newData = data.subdataWithRange(NSMakeRange(5, data.length - 5))
             
+            let dataLength = data.count
+            let r = 5...Int(dataLength)
+            
+            let newData = data.subdata(in: Range(r))
+            print(newData)
             let parsedResults: AnyObject!
             do{
-                parsedResults = try NSJSONSerialization.JSONObjectWithData(newData, options: .AllowFragments)
+                parsedResults = try JSONSerialization.jsonObject(with: newData, options: .allowFragments) as AnyObject!
             }catch {
                 sendError("cannot parse the data")
                 return
@@ -145,7 +155,7 @@ extension OnTheMapClient {
             if let account = parsedResults["account"] as? [String:AnyObject]{
                 let account_key = account["key"] as? String
                 self.account_key = account_key
-                completionHandlerFB(success: true, error: error)
+                completionHandlerFB(true, error as NSError?)
                 self.getStudentLocations{(success,result,error) in
                     if success{
                         self.getPublicUserData{(success, lastName,firstName, error) in
@@ -155,7 +165,7 @@ extension OnTheMapClient {
                 
             }
             
-        }
+        }) 
         task.resume()
     }
     

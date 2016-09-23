@@ -30,7 +30,7 @@ struct studentInfo {
         updatedAt = dictionary["updatedAt"] as? String
     }
     
-    static func locationsFromResults(results: [[String:AnyObject]]) -> [studentInfo]{
+    static func locationsFromResults(_ results: [[String:AnyObject]]) -> [studentInfo]{
         
         var info = [studentInfo]()
         for result in results{

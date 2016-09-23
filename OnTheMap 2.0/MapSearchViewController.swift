@@ -29,20 +29,24 @@ class MapSearchViewController: UIViewController, UITextFieldDelegate{
     @IBOutlet weak var label1: UILabel!
     @IBOutlet weak var Label2: UILabel!
     
-    @IBAction func SearchAgainButton(sender: AnyObject) {
+    var thePlaceSearched = String()
+    var theWebURL = String()
+    
+    @IBAction func SearchAgainButton(_ sender: AnyObject) {
+        thePlaceSearched = locationSearchTextField.text!
         self.searchAgainButtonTapped()
     }
 
-    @IBAction func searchButton(sender: AnyObject) {
+    @IBAction func searchButton(_ sender: AnyObject) {
         self.searchAdvance{(success, error) in
             if success {
-        self.mapView.hidden = false
-        self.blockView.hidden = true
-        self.blockView1.hidden = false
-        self.tryAgainButton.hidden = false
-        self.tryAgainLabel.hidden = false
-        self.label1.hidden = true
-        self.Label2.hidden = true
+        self.mapView.isHidden = false
+        self.blockView.isHidden = true
+        self.blockView1.isHidden = false
+        self.tryAgainButton.isHidden = false
+        self.tryAgainLabel.isHidden = false
+        self.label1.isHidden = true
+        self.Label2.isHidden = true
         
         self.textFieldShouldReturn(self.locationSearchTextField)
                 
@@ -59,11 +63,11 @@ class MapSearchViewController: UIViewController, UITextFieldDelegate{
         
         self.blockView1.alpha = 0.0
         view.insertSubview(self.blockView1, aboveSubview: self.mapView)
-        UIView.animateWithDuration(1.0, delay: 0, options: .CurveEaseOut, animations: {self.blockView1.alpha = 1.0}, completion: nil)
+        UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseOut, animations: {self.blockView1.alpha = 1.0}, completion: nil)
     }
     
-    @IBAction func dismiss(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func dismiss(_ sender: AnyObject) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
@@ -71,36 +75,35 @@ class MapSearchViewController: UIViewController, UITextFieldDelegate{
         self.beforeLaunchPreparation()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         subscribeToKeyboardNotifications()
         self.specialAffect()
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         unsubscribeFromKeyboardNotifications()
     }
     
-    @IBAction func submitButton(sender: AnyObject) {
+    @IBAction func submitButton(_ sender: AnyObject) {
         self.submitButtonTapped()
-        URLtextField.text = ""
     }
     
         
-    func searchAdvance(completionHandlerForSearch:(success: Bool, error: NSError?)-> Void) {
+    func searchAdvance(_ completionHandlerForSearch:@escaping (_ success: Bool, _ error: NSError?)-> Void) {
         
-        func sendError(error: String){
+        func sendError(_ error: String){
             let userInfo = [NSLocalizedDescriptionKey: error]
             
-            completionHandlerForSearch(success: false, error: NSError(domain: "Search Location Function", code: 1, userInfo: userInfo))
+            completionHandlerForSearch(false, NSError(domain: "Search Location Function", code: 1, userInfo: userInfo))
         }
         
         guard locationSearchTextField.text != "" else{
             performUIUpdatesOnMain(){
-                let alertController = UIAlertController(title: "Error", message: "The Search Phrase is Empty", preferredStyle: UIAlertControllerStyle.Alert)
-                alertController.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.Default, handler: nil))
-                self.presentViewController(alertController, animated: true, completion: nil)
+                let alertController = UIAlertController(title: "Error", message: "The Search Phrase is Empty", preferredStyle: UIAlertControllerStyle.alert)
+                alertController.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alertController, animated: true, completion: nil)
             }
             sendError("the text field is empty")
             return
@@ -111,9 +114,9 @@ class MapSearchViewController: UIViewController, UITextFieldDelegate{
             
             guard error == nil else {
                 performUIUpdatesOnMain(){
-                    let alertController = UIAlertController(title: "Error", message: "Cannot Locate This Place", preferredStyle: UIAlertControllerStyle.Alert)
-                    alertController.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.Default, handler: nil))
-                    self.presentViewController(alertController, animated: true, completion: nil)
+                    let alertController = UIAlertController(title: "Error", message: "Cannot Locate This Place", preferredStyle: UIAlertControllerStyle.alert)
+                    alertController.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: nil))
+                    self.present(alertController, animated: true, completion: nil)
                     
                 }
                 sendError("There is an error")
@@ -122,10 +125,10 @@ class MapSearchViewController: UIViewController, UITextFieldDelegate{
             
             guard placemarks!.count > 0 else {
                 
-                dispatch_async(dispatch_get_main_queue(),{
-                    let alertController = UIAlertController(title: "Error", message: "Cannot Locate The Place", preferredStyle: UIAlertControllerStyle.Alert)
-                    alertController.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.Default, handler: nil))
-                    self.presentViewController(alertController, animated: true, completion: nil)
+                DispatchQueue.main.async(execute: {
+                    let alertController = UIAlertController(title: "Error", message: "Cannot Locate The Place", preferredStyle: UIAlertControllerStyle.alert)
+                    alertController.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: nil))
+                    self.present(alertController, animated: true, completion: nil)
                 })
                 sendError("Cannot locate the place")
                 return
@@ -136,34 +139,34 @@ class MapSearchViewController: UIViewController, UITextFieldDelegate{
                 self.mapView.addAnnotation(self.placemark)
                 let region = MKCoordinateRegionMakeWithDistance(self.placemark.coordinate, 100000, 100000)
                 self.mapView.setRegion(region, animated: true)
-                completionHandlerForSearch(success: true, error: error)
+                completionHandlerForSearch(true, error as NSError?)
             })
         }
     }
     
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return true
     }
     
     func searchAgainButtonTapped(){
-        self.mapView.hidden = true
-        blockView.hidden = false
-        blockView1.hidden = true
-        tryAgainButton.hidden = true
-        tryAgainLabel.hidden = true
-        label1.hidden = false
-        Label2.hidden = false
+        self.mapView.isHidden = true
+        blockView.isHidden = false
+        blockView1.isHidden = true
+        tryAgainButton.isHidden = true
+        tryAgainLabel.isHidden = true
+        label1.isHidden = false
+        Label2.isHidden = false
     }
     
     func specialAffect(){
         self.label1.center.y = self.view.frame.height + 130
-        UIView.animateWithDuration(0.7, delay: 0, options: .CurveEaseOut, animations: ({self.label1.center.y = self.view.frame.height/2}), completion: nil)
+        UIView.animate(withDuration: 0.7, delay: 0, options: .curveEaseOut, animations: ({self.label1.center.y = self.view.frame.height/2}), completion: nil)
         
         self.Label2.center.y = self.view.frame.height + 130
-        UIView.animateWithDuration(0.7, delay: 0, options: .CurveEaseOut, animations: ({self.Label2.center.y = self.view.frame.height/2}), completion: nil)
+        UIView.animate(withDuration: 0.7, delay: 0, options: .curveEaseOut, animations: ({self.Label2.center.y = self.view.frame.height/2}), completion: nil)
         
         self.blockView.center.x = self.view.frame.width + 130
-        UIView.animateWithDuration(1, delay: 0, options: .CurveEaseOut, animations: ({self.blockView.center.x = self.view.frame.width/2}), completion: nil)
+        UIView.animate(withDuration: 1, delay: 0, options: .curveEaseOut, animations: ({self.blockView.center.x = self.view.frame.width/2}), completion: nil)
     }
     
     func submitButtonTapped(){
@@ -172,22 +175,22 @@ class MapSearchViewController: UIViewController, UITextFieldDelegate{
             OnTheMapClient.sharedInstance().postLocation(self.locationSearchTextField.text!, mediaURL: self.URLtextField.text!, latitude: self.placemark.coordinate.latitude, longitude: self.placemark.coordinate.longitude){( success,error) in
                 
                 if success {
+                    print("we did it")
                     performUIUpdatesOnMain(){
-                        self.mapView.hidden = false
-                        self.blockView.hidden = false
-                        let controller = self.storyboard!.instantiateViewControllerWithIdentifier("TabBarController") as! UITabBarController
-                        self.presentViewController(controller, animated: true, completion: nil)
+                        self.mapView.isHidden = false
+                        self.blockView.isHidden = false
+                        self.dismiss(animated: true, completion: nil)
                     }
                 }
             }
         }else {
-            OnTheMapClient.sharedInstance().updateLocation(self.locationSearchTextField.text!, mediaURL: self.URLtextField.text!, latitude: self.placemark.coordinate.latitude, longitude: self.placemark.coordinate.longitude){(success,error) in
+            OnTheMapClient.sharedInstance().updateLocation(thePlaceSearched, mediaURL: URLtextField.text!, latitude: self.placemark.coordinate.latitude, longitude: self.placemark.coordinate.longitude){(success,error) in
                 
                 if success{
                     performUIUpdatesOnMain(){
-                        
-                        let controller = self.storyboard!.instantiateViewControllerWithIdentifier("TabBarController") as! UITabBarController
-                        self.presentViewController(controller, animated: true, completion: nil)
+                        print("we did it")
+                        print(self.placemark.coordinate.latitude, self.thePlaceSearched, self.theWebURL)
+                        self.dismiss(animated: true, completion: nil)
                     }
                 }
             }
@@ -195,55 +198,55 @@ class MapSearchViewController: UIViewController, UITextFieldDelegate{
     }
     
     func beforeLaunchPreparation(){
-        tryAgainLabel.hidden = true
-        tryAgainButton.hidden = true
+        tryAgainLabel.isHidden = true
+        tryAgainButton.isHidden = true
         locationSearchTextField.delegate = self
         URLtextField.delegate = self
-        mapView.hidden = true
-        blockView1.hidden = true
-        blockView.hidden = false
+        mapView.isHidden = true
+        blockView1.isHidden = true
+        blockView.isHidden = false
     }
     
-    func textFieldDidBeginEditing(textField: UITextField) {
-        if locationSearchTextField.isFirstResponder() {
-            locationLabel.hidden = true
-        }else if URLtextField.isFirstResponder() {
-            linkLabel.hidden = true
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if locationSearchTextField.isFirstResponder {
+            locationLabel.isHidden = true
+        }else if URLtextField.isFirstResponder {
+            linkLabel.isHidden = true
         }
     }
     
     func subscribeToKeyboardNotifications(){
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MapSearchViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MapSearchViewController.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MapSearchViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MapSearchViewController.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
     func unsubscribeFromKeyboardNotifications(){
-        NSNotificationCenter.defaultCenter().removeObserver(self,name:UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name:UIKeyboardWillHideNotification, object:nil)
+        NotificationCenter.default.removeObserver(self,name:NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name:NSNotification.Name.UIKeyboardWillHide, object:nil)
     }
     
-    func keyboardWillShow(notification: NSNotification){
-        if locationSearchTextField.isFirstResponder() {
-            locationLabel.hidden = true
+    func keyboardWillShow(_ notification: Notification){
+        if locationSearchTextField.isFirstResponder {
+            locationLabel.isHidden = true
         view.frame.origin.y = -70
 //            view.frame.origin.y = -(getKeyboardHeight(notification))
-        }else if URLtextField.isFirstResponder(){
-            linkLabel.hidden = true
+        }else if URLtextField.isFirstResponder{
+            linkLabel.isHidden = true
         }
     }
     
-    func keyboardWillHide(notification: NSNotification){
+    func keyboardWillHide(_ notification: Notification){
             view.frame.origin.y = 0.0
         }
     
-    func getKeyboardHeight(notification: NSNotification) -> CGFloat{
-        let userInfo = notification.userInfo
+    func getKeyboardHeight(_ notification: Notification) -> CGFloat{
+        let userInfo = (notification as NSNotification).userInfo
         let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey]
             as! NSValue
-        return keyboardSize.CGRectValue().height
+        return keyboardSize.cgRectValue.height
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }

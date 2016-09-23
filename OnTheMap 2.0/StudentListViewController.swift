@@ -14,12 +14,12 @@ class StudentListViewController: UIViewController {
     
     @IBOutlet weak var studentsTableView: UITableView!
     
-    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
     
     var studentsInfo : [studentInfo] = [studentInfo]()
     
-    @IBAction func logout(sender: AnyObject) {
+    @IBAction func logout(_ sender: AnyObject) {
         self.logout()
     }
     
@@ -29,7 +29,7 @@ class StudentListViewController: UIViewController {
     }
     
     
-    @IBAction func FBlogOut(sender: AnyObject) {
+    @IBAction func FBlogOut(_ sender: AnyObject) {
         let loginManager = FBSDKLoginManager()
         loginManager.logOut()
         
@@ -39,40 +39,40 @@ class StudentListViewController: UIViewController {
     
     func logout(){
         
-        let alertController = UIAlertController(title: "Alert", message: "Sure to Logout?", preferredStyle: .Alert)
+        let alertController = UIAlertController(title: "Alert", message: "Sure to Logout?", preferredStyle: .alert)
         
-        let OKAction = UIAlertAction(title: "Yes", style: .Default) { (action) in
+        let OKAction = UIAlertAction(title: "Yes", style: .default) { (action) in
             
             if self.appDelegate.FBLogoutNumber == 1{
                 
                 let loginManager = FBSDKLoginManager()
                 loginManager.logOut()
                 
-                let controller = self.storyboard!.instantiateViewControllerWithIdentifier("LoginVC") as! LoginViewController
-                self.presentViewController(controller, animated: true, completion: nil)
+                let controller = self.storyboard!.instantiateViewController(withIdentifier: "LoginVC") as! LoginViewController
+                self.present(controller, animated: true, completion: nil)
                 
             } else {
                 self.appDelegate.FBLogoutNumber = 0
-                let controller = self.storyboard!.instantiateViewControllerWithIdentifier("LoginVC") as! LoginViewController
-                self.presentViewController(controller, animated: true, completion: nil)
+                let controller = self.storyboard!.instantiateViewController(withIdentifier: "LoginVC") as! LoginViewController
+                self.present(controller, animated: true, completion: nil)
                 
             }
         }
         alertController.addAction(OKAction)
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Default) { (action) in
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default) { (action) in
             // ...
         }
         alertController.addAction(cancelAction)
         
-        self.presentViewController(alertController, animated: true) {
+        self.present(alertController, animated: true) {
         }
         
         
         
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
     OnTheMapClient.sharedInstance().getStudentLocations{(success,result,error) in
@@ -83,7 +83,7 @@ class StudentListViewController: UIViewController {
             performUIUpdatesOnMain(){
                 self.studentsTableView.reloadData()
                 //self.automaticallyAdjustsScrollViewInsets = false
-                self.studentsTableView.contentInset = UIEdgeInsetsZero
+                self.studentsTableView.contentInset = UIEdgeInsets.zero
             }
         }
         }
@@ -96,13 +96,13 @@ class StudentListViewController: UIViewController {
 extension StudentListViewController: UITableViewDelegate, UITableViewDataSource{
     
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        let students = studentsInfo[indexPath.row]
-        let cell = tableView.dequeueReusableCellWithIdentifier("StudentTableViewCell", forIndexPath: indexPath) as! StudentTableViewCell
+        let students = studentsInfo[(indexPath as NSIndexPath).row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "StudentTableViewCell", for: indexPath) as! StudentTableViewCell
         
         cell.nameLabel.text = (students.firstName ?? "") + " " + (students.lastName ?? "")
-        cell.nameLabel.font = UIFont.boldSystemFontOfSize(25)
+        cell.nameLabel.font = UIFont.boldSystemFont(ofSize: 25)
         cell.timeLabel.text = "Updated at:   " + students.updatedAt!
         cell.timeLabel.textColor = UIColor(red: 114 / 255, green: 114 / 255, blue: 114 / 255, alpha: 1.0)
         cell.linkLabel.text = students.mediaURL
@@ -110,21 +110,21 @@ extension StudentListViewController: UITableViewDelegate, UITableViewDataSource{
         return cell
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return studentsInfo.count
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        let students = studentsInfo[indexPath.row]
+        let students = studentsInfo[(indexPath as NSIndexPath).row]
         
         if let toOpen = students.mediaURL {
-            let app = UIApplication.sharedApplication()
-            if toOpen.rangeOfString("https://") != nil || toOpen.rangeOfString("http://") != nil{
-                app.openURL(NSURL(string: toOpen)!)
+            let app = UIApplication.shared
+            if toOpen.range(of: "https://") != nil || toOpen.range(of: "http://") != nil{
+                app.openURL(URL(string: toOpen)!)
             }else if
-                toOpen.rangeOfString("https://") == nil && toOpen.rangeOfString("http://") == nil {
-                app.openURL(NSURL(string: ("https://" + toOpen))!)
+                toOpen.range(of: "https://") == nil && toOpen.range(of: "http://") == nil {
+                app.openURL(URL(string: ("https://" + toOpen))!)
             }
         }
     }

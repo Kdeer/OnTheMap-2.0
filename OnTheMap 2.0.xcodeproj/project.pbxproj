@@ -17,8 +17,6 @@
 		1439A6A21CC07E3000DC21B7 /* OnTheMapClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1439A6A11CC07E3000DC21B7 /* OnTheMapClient.swift */; };
 		1439A6A41CC07E7800DC21B7 /* OnTheMapConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1439A6A31CC07E7800DC21B7 /* OnTheMapConstants.swift */; };
 		1449F2D11CC32F1800E23169 /* MapSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1449F2D01CC32F1800E23169 /* MapSearchViewController.swift */; };
-		144B79A41CC48731005B779C /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 144B79A31CC48731005B779C /* FBSDKCoreKit.framework */; };
-		144B79A61CC4873D005B779C /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 144B79A51CC4873D005B779C /* FBSDKLoginKit.framework */; };
 		144FF1AC1CC91A13006907D6 /* OnTheMapUltiConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144FF1AB1CC91A13006907D6 /* OnTheMapUltiConvenience.swift */; };
 		1466B3EF1CC1302E00D44B37 /* OnTheMapConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1466B3EE1CC1302E00D44B37 /* OnTheMapConvenience.swift */; };
 		1466B3F11CC1C9B200D44B37 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1466B3F01CC1C9B200D44B37 /* MapViewController.swift */; };
@@ -27,6 +25,9 @@
 		1466B3FD1CC1E57B00D44B37 /* OnTheMapStudentInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1466B3FC1CC1E57B00D44B37 /* OnTheMapStudentInfo.swift */; };
 		1496EBF71CC8643800E44515 /* OnTheMapConvenience1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1496EBF61CC8643800E44515 /* OnTheMapConvenience1.swift */; };
 		14CA0D341D64FDFC00668617 /* StudentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CA0D331D64FDFC00668617 /* StudentTableViewCell.swift */; };
+		14E05CD41D94B711003F16CF /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14E05CD21D94B711003F16CF /* FBSDKCoreKit.framework */; };
+		14E05CD51D94B711003F16CF /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14E05CD31D94B711003F16CF /* FBSDKLoginKit.framework */; };
+		14E05CD71D94B8CD003F16CF /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14E05CD61D94B8CD003F16CF /* Bolts.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,8 +64,6 @@
 		1439A6A11CC07E3000DC21B7 /* OnTheMapClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnTheMapClient.swift; sourceTree = "<group>"; };
 		1439A6A31CC07E7800DC21B7 /* OnTheMapConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnTheMapConstants.swift; sourceTree = "<group>"; };
 		1449F2D01CC32F1800E23169 /* MapSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapSearchViewController.swift; sourceTree = "<group>"; };
-		144B79A31CC48731005B779C /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
-		144B79A51CC4873D005B779C /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		144FF1AB1CC91A13006907D6 /* OnTheMapUltiConvenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnTheMapUltiConvenience.swift; sourceTree = "<group>"; };
 		1466B3EE1CC1302E00D44B37 /* OnTheMapConvenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnTheMapConvenience.swift; sourceTree = "<group>"; };
 		1466B3F01CC1C9B200D44B37 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -73,6 +72,12 @@
 		1466B3FC1CC1E57B00D44B37 /* OnTheMapStudentInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnTheMapStudentInfo.swift; sourceTree = "<group>"; };
 		1496EBF61CC8643800E44515 /* OnTheMapConvenience1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnTheMapConvenience1.swift; sourceTree = "<group>"; };
 		14CA0D331D64FDFC00668617 /* StudentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentTableViewCell.swift; sourceTree = "<group>"; };
+		14E05CC91D94B57A003F16CF /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		14E05CCA1D94B57A003F16CF /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		14E05CD21D94B711003F16CF /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "../../../../Downloads/FacebookSDKs-iOS-4.15.1/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
+		14E05CD31D94B711003F16CF /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "../../../../Downloads/FacebookSDKs-iOS-4.15.1/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
+		14E05CD61D94B8CD003F16CF /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "../../../../Downloads/FacebookSDKs-iOS-4.15.1/Bolts.framework"; sourceTree = "<group>"; };
+		14E05CD81D94BA7E003F16CF /* OnTheMap 2.0.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "OnTheMap 2.0.entitlements"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,8 +85,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				144B79A61CC4873D005B779C /* FBSDKLoginKit.framework in Frameworks */,
-				144B79A41CC48731005B779C /* FBSDKCoreKit.framework in Frameworks */,
+				14E05CD71D94B8CD003F16CF /* Bolts.framework in Frameworks */,
+				14E05CD41D94B711003F16CF /* FBSDKCoreKit.framework in Frameworks */,
+				14E05CD51D94B711003F16CF /* FBSDKLoginKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,12 +118,14 @@
 		1439A6661CC07CB900DC21B7 = {
 			isa = PBXGroup;
 			children = (
-				144B79A51CC4873D005B779C /* FBSDKLoginKit.framework */,
-				144B79A31CC48731005B779C /* FBSDKCoreKit.framework */,
+				14E05CD61D94B8CD003F16CF /* Bolts.framework */,
+				14E05CC91D94B57A003F16CF /* FBSDKCoreKit.framework */,
+				14E05CCA1D94B57A003F16CF /* FBSDKLoginKit.framework */,
 				1439A6711CC07CB900DC21B7 /* OnTheMap 2.0 */,
 				1439A6861CC07CB900DC21B7 /* OnTheMap 2.0Tests */,
 				1439A6911CC07CB900DC21B7 /* OnTheMap 2.0UITests */,
 				1439A6701CC07CB900DC21B7 /* Products */,
+				14E05CD11D94B711003F16CF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -134,6 +142,7 @@
 		1439A6711CC07CB900DC21B7 /* OnTheMap 2.0 */ = {
 			isa = PBXGroup;
 			children = (
+				14E05CD81D94BA7E003F16CF /* OnTheMap 2.0.entitlements */,
 				1439A6721CC07CB900DC21B7 /* AppDelegate.swift */,
 				1466B3FB1CC1DDAE00D44B37 /* VC */,
 				1439A6A01CC07D6300DC21B7 /* OnTheMapClient */,
@@ -188,6 +197,15 @@
 				1449F2D01CC32F1800E23169 /* MapSearchViewController.swift */,
 			);
 			name = VC;
+			sourceTree = "<group>";
+		};
+		14E05CD11D94B711003F16CF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				14E05CD21D94B711003F16CF /* FBSDKCoreKit.framework */,
+				14E05CD31D94B711003F16CF /* FBSDKLoginKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -253,21 +271,29 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Xiaochao Luo";
 				TargetAttributes = {
 					1439A66E1CC07CB900DC21B7 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = 3KEDNP64AW;
+						LastSwiftMigration = 0800;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 					1439A6821CC07CB900DC21B7 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = 3KEDNP64AW;
+						LastSwiftMigration = 0800;
 						TestTargetID = 1439A66E1CC07CB900DC21B7;
 					};
 					1439A68D1CC07CB900DC21B7 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = 3KEDNP64AW;
+						LastSwiftMigration = 0800;
 						TestTargetID = 1439A66E1CC07CB900DC21B7;
 					};
 				};
@@ -405,8 +431,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -428,7 +456,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -450,8 +478,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -467,9 +497,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -478,6 +509,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "OnTheMap 2.0/OnTheMap 2.0.entitlements";
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -486,6 +519,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "LX.OnTheMap-2-0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -493,6 +527,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "OnTheMap 2.0/OnTheMap 2.0.entitlements";
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -501,6 +537,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "LX.OnTheMap-2-0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -512,6 +549,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "LX.OnTheMap-2-0Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OnTheMap 2.0.app/OnTheMap 2.0";
 			};
 			name = Debug;
@@ -524,6 +562,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "LX.OnTheMap-2-0Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OnTheMap 2.0.app/OnTheMap 2.0";
 			};
 			name = Release;
@@ -535,6 +574,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "LX.OnTheMap-2-0UITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = "OnTheMap 2.0";
 			};
 			name = Debug;
@@ -546,6 +586,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "LX.OnTheMap-2-0UITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = "OnTheMap 2.0";
 			};
 			name = Release;
